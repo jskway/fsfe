@@ -86,3 +86,5 @@ Inside sshd_config, set `PermitRootLogin` to `no`
 Restart ssh daemon
 
 `sudo service sshd restart`
+
+[Back](./README.md)
