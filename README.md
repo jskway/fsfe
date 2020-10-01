@@ -77,3 +77,12 @@ Add the A Records with your new domain on your cloud provider's dashboard
 Update the nameservers on your domain registrar's dashboard
 
 ## [Server Setup (Ubuntu)](./serverSetup.md)
+
+1. Update software
+2. Create a new user
+3. Make that user a super user
+4. Enable login for new user
+5. Disable root login
+
+** You always want to disable root login. There's never a reason to login as
+root. It will only expose yourself to more attacks. **
