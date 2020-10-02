@@ -275,4 +275,6 @@ https://docs.github.com/en/free-pro-team@latest/github/using-git/adding-a-remote
 After doing this we can develop locally, and push our changes to Github.
 Then we can pull the changes down to our server, and restart the server.
 
+**Note**: On a production server, you will always want to install [fail2ban](https://www.techrepublic.com/article/how-to-install-fail2ban-on-ubuntu-server-18-04/)
+
 [Back](./README.md)
