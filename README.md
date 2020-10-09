@@ -86,3 +86,60 @@ Update the nameservers on your domain registrar's dashboard
 
 ** You always want to disable root login. There's never a reason to login as
 root. It will only expose yourself to more attacks. **
+
+## Bash Basics
+
+### Standard Streams
+
+**Standard Streams** are interconnected input/output
+communication channels between a computer program and its environment.
+
+- Standard output (`stdout`)
+
+- Standard input (`stdin`)
+
+- Standard error (`stderr`)
+
+This is the standard API across nearly all Unix applications.
+
+### Redirection
+
+- | (read from stdout)
+- \> (write stdout to file)
+- \>\> (append stdout to file)
+- < (read from stdin)
+- 2> (read from stderr)
+
+`ps` - shows a snapshot of the current processes
+
+`grep 'REGEX_PATTERN'` - prints lines that match patterns
+
+`ps | grep bash` - takes all the output of PS, passes it to `grep` which will
+run a regex on it, and returns the lines that match `bash`
+
+### Finding Things
+
+#### Find
+
+`find /directory -option file.txt` - search for file/folder names
+
+Find all log files in /var/log/nginx
+
+`find /var/log/nginx -type f -name "*.log"`
+
+Find all directories with the name 'log'
+
+`find / -type d -name log`
+
+#### Grep
+
+`grep -options 'expression' /path/to/directory` - search file contents
+
+Over time, log files automatically get concatenated and gzipped. zgrep can be
+very useful for searching inside these files.
+
+`zgrep FILE` - search inside gzip file
+
+Find running node processes
+
+`ps aux | grep node`
