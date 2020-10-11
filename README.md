@@ -143,3 +143,97 @@ very useful for searching inside these files.
 Find running node processes
 
 `ps aux | grep node`
+
+## Security
+
+Read auth log
+
+`sudo cat /var/log/auth.log`
+
+### Security Checklist
+
+- SSH
+- Firewalls
+- Updates
+- Two factor authentication
+- VPN
+
+#### Application Updates
+
+Install unattended upgrades
+
+`sudo apt install unattended-upgrades`
+
+This will automatically upgrade your software for security or minor fixes
+
+View configuration file
+
+`cat /etc/apt/apt.conf.d/50unattended-upgrades`
+
+#### Firewalls
+
+**Firewall:** A network security device that monitors incoming and outgoing
+network traffic and decides whether to allow or block specific traffic based on
+a defined set of security rules.
+
+**nmap:** a port scanner that can run over an entire range of ip addresses and
+checks for open ports
+
+**port**: a communication endpoint that maps to a specific process or network
+service
+
+Every port that is open to the Internet exposes another potential vulnerability
+that can be exploited.  In general, you want the minimum amount of ports you
+need running - ports are closed by default.
+
+Install nmap
+
+`sudo apt install nmap`
+
+Run nmap
+
+`nmap YOUR_SERVER_IP_ADDRESS`
+
+Run nmap with more service/version info
+
+`nmap -sV YOUR_SERVER_IP_ADDRESS`
+
+#### ufw
+
+**ufw (uncomplicated firewall)**: a program for managing a Linux firewall 
+
+Check firewall status
+
+`sudo ufw status`
+
+Enable ssh
+
+`sudo ufw allow ssh`
+
+Enable http
+
+`sudo ufw allow http`
+
+
+Enable firewall
+
+`sudo ufw enable`
+
+#### Permissions
+
+Permissions are kind of based on the idea that eventually someone probably will
+get into your server.  Permissions mean locking down what you can do with a
+file. Eg. read, write and execute.
+
+[Linux Chmod Permissions Cheat Sheet](https://isabelcastillo.com/linux-chmod-permissions-cheat-sheet)
+
+Apply the least priviledge principle - don't give any  more permissions then a user
+needs.
+
+#### Upgrade Node
+
+[Nodesource](https://github.com/nodesource/distributions)
+
+
+
+
