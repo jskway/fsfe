@@ -234,6 +234,153 @@ needs.
 
 [Nodesource](https://github.com/nodesource/distributions)
 
+## HTTP
 
+**HTTP (Hypertext Transfer Protocol)** is a set of rules that defines how code
+moves between the client and server.  The entire model of HTTP is built around 
+requests and responses.
+
+### Headers
+
+Packets are made up of metadata and data.  Part of that metadata is the HTTP
+header.  It can tell you where the packet is coming from, what kind of encoding
+it has, what kind of content it has, and a bunch of other information you can
+pack and unload.  Headers are good for adding and subtracting information along
+the way to its destination.  (Eg. NGINX headers, Express headers)
+
+Example of a Request header:
+
+```xml
+GET /home.html HTTP/1.1
+Host: developer.mozilla.org
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:50.0) Gecko/20100101 Firefox/50.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate, br
+```
+
+**Common Headers**
+
+| Name       | Description     |
+| :------------- | :---------- |
+| User-agent | The requesting device type   |
+| Accept | What the device will handle |
+| Accept-language | Browser languages |
+| Content-type | The type of media |
+| Set-cookie | Sets stateful information |
+| X- | Typically used for custom headers |
+
+A **cookie** is a small piece of data that a server sends to the user's web browser.
+The browser can store it and send it back with later requests to the same server.
+
+The internet is stateless - every request and response is a brand new request
+and response.  The server doesn't remember that you've been here or not. 
+Cookies allow us to persist data over time and allows things like
+authentication, storing user preferences, etc.  The dangerous thing about
+cookies is that persist over every single request unless you expire them.
+
+Example of a Response header:
+
+```xml
+200 OK
+Access-Control-Allow-Origin: *
+Connection: Keep-Alive
+Content-Encoding: gzip
+Content-Type: text/html; charset=utf-8
+Date: Mon, 18 Jul 2016 16:06:00 GMT
+Etag: "c561c68d0ba92bbeb8b0f612a9199f722e3a621a"
+Keep-Alive: timeout=5, max=997
+Last-Modified: Mon, 18 Jul 2016 02:36:04 GMT
+Server: Apache
+Set-Cookie: mykey=myvalue; expires=Mon, 17-Jul-2017 16:06:00 GMT; Max-Age=31449600; Path=/; secure
+```
+
+**Status Code Categories**
+
+| Code       | Description     |
+| :------------- | :---------- |
+| 1xx | Information |
+| 2xx | Success  |
+| 3xx | Redirect |
+| 4xx | Client error |
+| 5xx | Server error |
+
+### HTTPS
+
+"**HTTPS (HyperText Transfer Protocol Secure)** is an encrypted version of the HTTP
+protocol. It uses SSL or TLS to encrypt all communication between a client and
+a server. This secure connection allows clients to safely exchange sensitive
+data with a server, such as when performing banking activities or online shopping."
+– [MDN](https://developer.mozilla.org/en-US/docs/Glossary/https)
+
+#### Adding HTTPS to NGINX
+
+Go to [Certbot](https://certbot.eff.org/) and follow their instructions
+
+You may need to set the server name in nginx to your domain names
+
+`sudo vim /etc/nginx/sites-available/default`
+
+After following the instructions on Certbot, we need to open port 443 on our
+firewall:
+
+`sudo ufw allow https`
+
+### HTTP/1.1 vs HTTP/2
+
+With HTTP/1.1, every single request has it's own thread or connection.
+
+HTTP/2 enables multiplexing.  So we can make one connection, and make multiple
+requests over that single connection.
+
+Enable http2 in nginx
+
+`sudo vim /etc/nginx/sites-available/default`
+
+`listen 443 http2 ssl;` <- Just add http2
+
+Reload nginx
+
+`sudo service nginx reload`
+
+[Akamai HTTP/2 Demo](https://http2.akamai.com/demo)
+
+#### HTTP/3
+
+Google invented a protocol called QUIC, which enables HTTP over UDP.  This is
+essentially HTTP/3, but isn't widely supported yet by all browsers.
+
+## Containers
+
+**Microservices**: an architectural style that structures an application as a
+collection of loosely coupled services.
+
+**Containers** are a standard unit of software that packages up code and all its
+dependencies.  Containers enable your applications to run quickly and reliably
+in different environments.  
+
+Benefits of containers:
+- Lightweight
+- Portable
+- Easier for development
+- Easier to manage
+- Faster startup
+- Decouple application from infrastructure
+
+**Docker** is the biggest containerization service in the world today.
+
+**Kubernetes** is a open-source system for the orchestration layer - it's what
+controls the rolling out of all the containers you're deploying
+
+**Load balancers** are servers that evenly distribute incoming requests to
+multiple downstream servers to prevent a single server from being over utilized.
+
+Load balancers work with scheduling algorithms, which determine which server a
+request is forwarded to.  Examples:
+- Round Robin
+- IP Hashing
+- Random Choice
+- Least Connections
+- Least Load
 
 
