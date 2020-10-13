@@ -183,7 +183,7 @@ checks for open ports
 service
 
 Every port that is open to the Internet exposes another potential vulnerability
-that can be exploited.  In general, you want the minimum amount of ports you
+that can be exploited. In general, you want the minimum amount of ports you
 need running - ports are closed by default.
 
 Install nmap
@@ -200,7 +200,7 @@ Run nmap with more service/version info
 
 #### ufw
 
-**ufw (uncomplicated firewall)**: a program for managing a Linux firewall 
+**ufw (uncomplicated firewall)**: a program for managing a Linux firewall
 
 Check firewall status
 
@@ -214,7 +214,6 @@ Enable http
 
 `sudo ufw allow http`
 
-
 Enable firewall
 
 `sudo ufw enable`
@@ -222,12 +221,12 @@ Enable firewall
 #### Permissions
 
 Permissions are kind of based on the idea that eventually someone probably will
-get into your server.  Permissions mean locking down what you can do with a
+get into your server. Permissions mean locking down what you can do with a
 file. Eg. read, write and execute.
 
 [Linux Chmod Permissions Cheat Sheet](https://isabelcastillo.com/linux-chmod-permissions-cheat-sheet)
 
-Apply the least priviledge principle - don't give any  more permissions then a user
+Apply the least priviledge principle - don't give any more permissions then a user
 needs.
 
 #### Upgrade Node
@@ -237,16 +236,16 @@ needs.
 ## HTTP
 
 **HTTP (Hypertext Transfer Protocol)** is a set of rules that defines how code
-moves between the client and server.  The entire model of HTTP is built around 
+moves between the client and server. The entire model of HTTP is built around
 requests and responses.
 
 ### Headers
 
-Packets are made up of metadata and data.  Part of that metadata is the HTTP
-header.  It can tell you where the packet is coming from, what kind of encoding
+Packets are made up of metadata and data. Part of that metadata is the HTTP
+header. It can tell you where the packet is coming from, what kind of encoding
 it has, what kind of content it has, and a bunch of other information you can
-pack and unload.  Headers are good for adding and subtracting information along
-the way to its destination.  (Eg. NGINX headers, Express headers)
+pack and unload. Headers are good for adding and subtracting information along
+the way to its destination. (Eg. NGINX headers, Express headers)
 
 Example of a Request header:
 
@@ -261,22 +260,22 @@ Accept-Encoding: gzip, deflate, br
 
 **Common Headers**
 
-| Name       | Description     |
-| :------------- | :---------- |
-| User-agent | The requesting device type   |
-| Accept | What the device will handle |
-| Accept-language | Browser languages |
-| Content-type | The type of media |
-| Set-cookie | Sets stateful information |
-| X- | Typically used for custom headers |
+| Name            | Description                       |
+| :-------------- | :-------------------------------- |
+| User-agent      | The requesting device type        |
+| Accept          | What the device will handle       |
+| Accept-language | Browser languages                 |
+| Content-type    | The type of media                 |
+| Set-cookie      | Sets stateful information         |
+| X-              | Typically used for custom headers |
 
 A **cookie** is a small piece of data that a server sends to the user's web browser.
 The browser can store it and send it back with later requests to the same server.
 
 The internet is stateless - every request and response is a brand new request
-and response.  The server doesn't remember that you've been here or not. 
+and response. The server doesn't remember that you've been here or not.
 Cookies allow us to persist data over time and allows things like
-authentication, storing user preferences, etc.  The dangerous thing about
+authentication, storing user preferences, etc. The dangerous thing about
 cookies is that persist over every single request unless you expire them.
 
 Example of a Response header:
@@ -297,13 +296,13 @@ Set-Cookie: mykey=myvalue; expires=Mon, 17-Jul-2017 16:06:00 GMT; Max-Age=314496
 
 **Status Code Categories**
 
-| Code       | Description     |
-| :------------- | :---------- |
-| 1xx | Information |
-| 2xx | Success  |
-| 3xx | Redirect |
-| 4xx | Client error |
-| 5xx | Server error |
+| Code | Description  |
+| :--- | :----------- |
+| 1xx  | Information  |
+| 2xx  | Success      |
+| 3xx  | Redirect     |
+| 4xx  | Client error |
+| 5xx  | Server error |
 
 ### HTTPS
 
@@ -330,7 +329,7 @@ firewall:
 
 With HTTP/1.1, every single request has it's own thread or connection.
 
-HTTP/2 enables multiplexing.  So we can make one connection, and make multiple
+HTTP/2 enables multiplexing. So we can make one connection, and make multiple
 requests over that single connection.
 
 Enable http2 in nginx
@@ -347,7 +346,7 @@ Reload nginx
 
 #### HTTP/3
 
-Google invented a protocol called QUIC, which enables HTTP over UDP.  This is
+Google invented a protocol called QUIC, which enables HTTP over UDP. This is
 essentially HTTP/3, but isn't widely supported yet by all browsers.
 
 ## Containers
@@ -356,10 +355,11 @@ essentially HTTP/3, but isn't widely supported yet by all browsers.
 collection of loosely coupled services.
 
 **Containers** are a standard unit of software that packages up code and all its
-dependencies.  Containers enable your applications to run quickly and reliably
-in different environments.  
+dependencies. Containers enable your applications to run quickly and reliably
+in different environments.
 
 Benefits of containers:
+
 - Lightweight
 - Portable
 - Easier for development
@@ -376,11 +376,114 @@ controls the rolling out of all the containers you're deploying
 multiple downstream servers to prevent a single server from being over utilized.
 
 Load balancers work with scheduling algorithms, which determine which server a
-request is forwarded to.  Examples:
+request is forwarded to. Examples:
+
 - Round Robin
 - IP Hashing
 - Random Choice
 - Least Connections
 - Least Load
 
+Display running processes
 
+`top`
+
+Install htop
+
+`sudo apt install htop`
+
+Display running processes
+
+`htop`
+
+Htop does the same thing as top but in a prettier interface
+
+[NGINX can also be used as a load balancer](https://docs.nginx.com/nginx/admin-guide/load-balancer/http-load-balancer/)
+
+### Deployment
+
+Ansible, Chef and Puppet are popular tools that allow you to set up
+configuration scripts - you give them some resources and server IPs - which set
+up hundreds or thousands of servers at once.
+
+## Saving Data
+
+"90% of what you do as a software engineer is writing things into a database,
+and reading things out of a database."
+
+**Databases** give us a structured way of saving data in such a way that it's
+readable and writable by all parties in a performant manner.
+
+### Database Types
+
+**Relational** databases describe how entities relate to each other. They use
+SQL, tables and enforce a strict structure (schema).
+
+**Non-relational** databases are non-SQL, data agnostic, and have a loose structure.
+
+#### Redis
+
+Install redis server
+
+`sudo apt install redis-server`
+
+Edit config to start with system
+
+`sudo vim /etc/redis/redis.conf`
+`supervised systemd`
+
+Restart redis server
+
+`sudo systemctl restart redis.service`
+
+[Using Redis with Node](https://github.com/NodeRedis/node-redis)
+
+#### MySQL
+
+Install mysql server
+
+`sudo apt install mysql-server`
+
+Run setup
+
+`mysql_secure_installation`
+
+[Using MySQL with Node](https://github.com/mysqljs/mysql)
+
+### Web Sockets
+
+The **Web Sockets** API makes it possible to open a persistent, two-way
+connection between the user's browser and a server.
+
+## Final Project
+
+Create a chat bot using websockets
+
+To enable websockets in NGINX, you'll need to add the header upgrade in your
+location block
+
+Open the configuration file
+
+`sudo vim /etc/nginx/sites-available/default/`
+
+```
+location / {
+  proxy_set_header Upgrade $http_upgrade;
+  proxy_set_header Connection "upgrade";
+
+  proxy_pass http://127.0.0.1:3000;
+}
+```
+
+Tips:
+Stop pm2 processes
+
+`sudo pm2 stop <id>`
+
+Start a pm2 process
+
+`sudo pm2 start app.js`
+
+Make sure to reload nginx after you make changes to its config
+
+`sudo service nginx reload`
